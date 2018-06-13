@@ -9,8 +9,10 @@ namespace CoreCourse.StateMgmt.Web.Controllers
 {
     public class CookiesController : Controller
     {
+        // de cookie die aangemaakt wordt waar uiteindelijk de info in bewaard zal worden.
         const string COOKIENAME = "TheCookieCookie";
 
+        // een lijst van biscuits (heeft nog niks te maken met cookies)
         List<BiscuitVm> AllBiscuits = new List<BiscuitVm> {
             new BiscuitVm { Name = "Almond Thins", ImageName = "almondthins" },
             new BiscuitVm { Name = "Butter Crisp", ImageName = "buttercrisp" },
@@ -22,13 +24,15 @@ namespace CoreCourse.StateMgmt.Web.Controllers
         public IActionResult Index()
         {
             //check if a cookie with this name exists
+            // kijkt als de cookie met naam "TheCookieCookie" al bestaat
             if (Request.Cookies.ContainsKey(COOKIENAME))
             {
                 string cookieImage = Request.Cookies[COOKIENAME]; //get cookie value
 
                 //check if this biscuit is still known to us
                 var biscuit = AllBiscuits.FirstOrDefault(c => c.ImageName == cookieImage);
-                if (biscuit != null) return View("ShowCookie", biscuit);
+                if (biscuit != null)
+                    return View("ShowCookie", biscuit);
             }
 
             //in all other cases, show the biscuit list
