@@ -32,6 +32,7 @@ namespace CoreCourse.StateMgmt.Web.Controllers
                 //check if this biscuit is still known to us
                 var biscuit = AllBiscuits.FirstOrDefault(c => c.ImageName == cookieImage);
                 if (biscuit != null)
+                    //returned de view ShowCookie, die als model het object 'biscuit' gebruikt.
                     return View("ShowCookie", biscuit);
             }
 
